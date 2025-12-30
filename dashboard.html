@@ -1,46 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BCPS Dashboard</title>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-
 <style>
-body{font-family:Arial}
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f4f6f8;
+}
+.sidebar{
+  width:220px;
+  height:100vh;
+  background:#0a7c3a;
+  color:#fff;
+  position:fixed;
+}
+.sidebar h2{
+  text-align:center;
+  padding:15px;
+  margin:0;
+  border-bottom:1px solid rgba(255,255,255,.3);
+}
+.sidebar a{
+  display:block;
+  padding:12px;
+  color:#fff;
+  text-decoration:none;
+}
+.sidebar a:hover{
+  background:#095f2d;
+}
+.main{
+  margin-left:220px;
+  padding:20px;
+}
+.card{
+  display:inline-block;
+  background:#fff;
+  padding:20px;
+  margin:10px;
+  width:200px;
+  box-shadow:0 0 5px #aaa;
+}
 </style>
 </head>
 
 <body>
 
-<h2>Welcome to Bright Career Public School</h2>
-<button onclick="logout()">Logout</button>
+<div class="sidebar">
+  <h2>BCPS</h2>
+  <a href="#">Dashboard</a>
+  <a href="#">Student</a>
+  <a href="#">Attendance</a>
+  <a href="#">Fees</a>
+  <a href="#">Homework</a>
+  <a href="#">Result</a>
+</div>
 
-<script>
-  var firebaseConfig = {
-    apiKey: "AIzaSyCSH7H2tE22KarKb5qb2Nr6H0V1Ok5O76c",
-    authDomain: "bcps-b9470.firebaseapp.com",
-    projectId: "bcps-b9470",
-    storageBucket: "bcps-b9470.firebasestorage.app",
-    messagingSenderId: "1036686596196",
-    appId: "1:1036686596196:web:dcaf68ece5a45336912771"
-  };
+<div class="main">
+  <h1>Welcome to Bright Career Public School</h1>
+  <p>Indira Nagar, Shravasti (U.P.)</p>
 
-  firebase.initializeApp(firebaseConfig);
-  var auth = firebase.auth();
-
-  auth.onAuthStateChanged(function(user){
-    if(!user){
-      window.location.href="index.html";
-    }
-  });
-
-  function logout(){
-    auth.signOut().then(()=>{
-      window.location.href="index.html";
-    });
-  }
-</script>
+  <div class="card">Student Admission</div>
+  <div class="card">Attendance</div>
+  <div class="card">Fees</div>
+  <div class="card">Result</div>
+</div>
 
 </body>
 </html>
