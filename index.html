@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BCPS Login</title>
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
 <style>
 body{
@@ -16,22 +13,62 @@ body{
   justify-content:center;
   align-items:center;
   background:#eef2f3;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
 }
 .box{
   background:#fff;
-  padding:30px;
-  width:300px;
-  text-align:center;
+  width:320px;
+  padding:25px;
   box-shadow:0 0 10px #aaa;
+}
+h2{
+  text-align:center;
+  color:#0a7c3a;
+  margin-bottom:5px;
+}
+p.school{
+  text-align:center;
+  font-size:14px;
+  margin-top:0;
+}
+input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
 }
 button{
   width:100%;
   padding:12px;
+  margin-top:10px;
+  border:none;
+  font-size:15px;
+  cursor:pointer;
+}
+.signin{
   background:#0a7c3a;
   color:#fff;
-  border:none;
-  font-size:16px;
+}
+.signup{
+  background:#1f6feb;
+  color:#fff;
+}
+.google{
+  background:#fff;
+  color:#444;
+  border:1px solid #ccc;
+}
+.divider{
+  text-align:center;
+  margin:15px 0;
+  font-size:13px;
+  color:#666;
+}
+.link{
+  text-align:center;
+  margin-top:10px;
+  font-size:14px;
+  color:#1f6feb;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -39,31 +76,40 @@ button{
 <body>
 
 <div class="box">
-  <h2>BCPS Login</h2>
-  <p>Bright Career Public School</p>
-  <button onclick="googleLogin()">Sign in with Google</button>
-  <p id="msg"></p>
+  <h2>BCPS</h2>
+  <p class="school">Bright Career Public School</p>
+
+  <!-- SIGN IN -->
+  <input type="email" placeholder="Email">
+  <input type="password" placeholder="Password">
+  <button class="signin" onclick="signIn()">Sign In</button>
+
+  <!-- SIGN UP -->
+  <button class="signup" onclick="signUp()">Sign Up</button>
+
+  <div class="divider">OR</div>
+
+  <!-- GOOGLE -->
+  <button class="google" onclick="googleLogin()">
+    Continue with Google
+  </button>
+
+  <div class="link" onclick="forgotPass()">Forgot password?</div>
 </div>
 
 <script>
-  // 🔥 FIREBASE CONFIG
-  var firebaseConfig = {
-    apiKey: "AIzaSyCSH7H2tE22KarKb5qb2Nr6H0V1Ok5O76c",
-    authDomain: "bcps-b9470.firebaseapp.com",
-    projectId: "bcps-b9470",
-    storageBucket: "bcps-b9470.firebasestorage.app",
-    messagingSenderId: "1036686596196",
-    appId: "1:1036686596196:web:dcaf68ece5a45336912771"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  var auth = firebase.auth();
-  var provider = new firebase.auth.GoogleAuthProvider();
-
-  function googleLogin(){
-    auth.signInWithRedirect(provider);
-  }
+function signIn(){
+  alert("Sign In button click ho raha hai");
+}
+function signUp(){
+  alert("Sign Up button click ho raha hai");
+}
+function googleLogin(){
+  alert("Google Sign In click ho raha hai");
+}
+function forgotPass(){
+  alert("Forgot password click ho raha hai");
+}
 </script>
 
 </body>
