@@ -20,18 +20,18 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// LOGIN BUTTON
-const btn = document.getElementById("googleLoginBtn");
-if (btn) {
-  btn.addEventListener("click", () => {
-    signInWithRedirect(auth, provider);
-  });
-}
-
-// AFTER REDIRECT LOGIN
-getRedirectResult(auth).then(() => {
-  // login successful
+// 🔑 WAIT FOR PAGE LOAD
+window.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("googleLoginBtn");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      signInWithRedirect(auth, provider);
+    });
+  }
 });
+
+// AFTER GOOGLE REDIRECT
+getRedirectResult(auth).catch(() => {});
 
 // PROTECT DASHBOARD
 onAuthStateChanged(auth, (user) => {
@@ -41,4 +41,3 @@ onAuthStateChanged(auth, (user) => {
     }
   }
 });
-
