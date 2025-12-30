@@ -1,104 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <title>BCPS Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
 <style>
-/* Extra dashboard styling */
-.topbar{
-  background:#0a7c3a;
-  color:#fff;
-  padding:12px 20px;
-  font-size:18px;
-}
-.cards{
-  display:flex;
-  flex-wrap:wrap;
-}
-.card{
-  border-radius:6px;
-}
-.logout-btn{
-  float:right;
-  background:#fff;
-  color:#0a7c3a;
-  padding:6px 12px;
-  border:none;
-  cursor:pointer;
-  border-radius:4px;
-}
+body{font-family:Arial}
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  Bright Career Public School (BCPS)
-  <button class="logout-btn" onclick="logout()">Logout</button>
-</div>
+<h2>Welcome to Bright Career Public School</h2>
+<button onclick="logout()">Logout</button>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-  <h2>BCPS</h2>
-  <a href="#">Dashboard</a>
-  <a href="#">Student Information</a>
-  <a href="#">Attendance Register</a>
-  <a href="#">Fees Management</a>
-  <a href="#">Homework / Notice</a>
-  <a href="#">Result Portal</a>
-</div>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyCSH7H2tE22KarKb5qb2Nr6H0V1Ok5O76c",
+    authDomain: "bcps-b9470.firebaseapp.com",
+    projectId: "bcps-b9470",
+    storageBucket: "bcps-b9470.firebasestorage.app",
+    messagingSenderId: "1036686596196",
+    appId: "1:1036686596196:web:dcaf68ece5a45336912771"
+  };
 
-<!-- MAIN CONTENT -->
-<div class="main">
-  <h1>Welcome to BCPS Dashboard</h1>
-  <p>Indira Nagar, Shravasti (U.P.)</p>
+  firebase.initializeApp(firebaseConfig);
+  var auth = firebase.auth();
 
-  <div class="cards">
-    <div class="card">Student Admission</div>
-    <div class="card">Daily Attendance</div>
-    <div class="card">Fees Status</div>
-    <div class="card">Exam Result</div>
-    <div class="card">Homework & Notices</div>
-    <div class="card">Staff Section</div>
-  </div>
-</div>
-
-<!-- FIREBASE + AUTH CHECK -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-import { getAuth, signOut, onAuthStateChanged } 
-from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCSH7H2tE22KarKb5qb2Nr6H0V1Ok5O76c",
-  authDomain: "bcps-b9470.firebaseapp.com",
-  projectId: "bcps-b9470",
-  storageBucket: "bcps-b9470.firebasestorage.app",
-  messagingSenderId: "1036686596196",
-  appId: "1:1036686596196:web:dcaf68ece5a45336912771"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// 🔒 Protect dashboard
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "index.html";
-  }
-});
-
-// 🔓 Logout
-window.logout = function () {
-  signOut(auth).then(() => {
-    window.location.href = "index.html";
+  auth.onAuthStateChanged(function(user){
+    if(!user){
+      window.location.href="index.html";
+    }
   });
-}
+
+  function logout(){
+    auth.signOut().then(()=>{
+      window.location.href="index.html";
+    });
+  }
 </script>
 
 </body>
