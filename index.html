@@ -3,11 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BCPS Login</title>
-
-<!-- Firebase SDKs (STABLE v8) -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<title>BCPS</title>
 
 <style>
 body{
@@ -17,49 +13,24 @@ body{
   justify-content:center;
   align-items:center;
   background:#eef2f3;
-  font-family:Arial, sans-serif;
+  font-family:Arial;
 }
 .box{
   background:#fff;
+  padding:30px;
   width:320px;
-  padding:25px;
+  text-align:center;
   box-shadow:0 0 10px #aaa;
 }
-h2{
-  text-align:center;
-  color:#0a7c3a;
-  margin-bottom:5px;
-}
-p.school{
-  text-align:center;
-  font-size:14px;
-  margin-top:0;
-}
-input{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-}
+h2{color:#0a7c3a;margin-bottom:5px;}
+p{margin-top:0;}
 button{
-  width:100%;
   padding:12px;
-  margin-top:10px;
+  width:100%;
+  background:#0a7c3a;
+  color:#fff;
   border:none;
-  font-size:15px;
-  cursor:pointer;
-}
-.signin{background:#0a7c3a;color:#fff;}
-.signup{background:#1f6feb;color:#fff;}
-.google{
-  background:#fff;
-  color:#444;
-  border:1px solid #ccc;
-}
-.divider{
-  text-align:center;
-  margin:15px 0;
-  font-size:13px;
-  color:#666;
+  font-size:16px;
 }
 </style>
 </head>
@@ -68,62 +39,14 @@ button{
 
 <div class="box">
   <h2>BCPS</h2>
-  <p class="school">Bright Career Public School</p>
-
-  <!-- EMAIL / PASSWORD -->
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-
-  <button class="signin" onclick="signIn()">Sign In</button>
-  <button class="signup" onclick="signUp()">Sign Up</button>
-
-  <div class="divider">OR</div>
-
-  <!-- GOOGLE -->
-  <button class="google" onclick="googleLogin()">
-    Continue with Google
-  </button>
-
-  <p id="msg" style="color:red;text-align:center;"></p>
+  <p>Bright Career Public School</p>
+  <button onclick="openSite()">Enter Website</button>
 </div>
 
 <script>
-  // 🔥 FIREBASE CONFIG (BCPS)
-  var firebaseConfig = {
-    apiKey: "AIzaSyCSH7H2tE22KarKb5qb2Nr6H0V1Ok5O76c",
-    authDomain: "bcps-b9470.firebaseapp.com",
-    projectId: "bcps-b9470",
-    storageBucket: "bcps-b9470.firebasestorage.app",
-    messagingSenderId: "1036686596196",
-    appId: "1:1036686596196:web:dcaf68ece5a45336912771"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  var auth = firebase.auth();
-  var provider = new firebase.auth.GoogleAuthProvider();
-
-  // SIGN UP
-  function signUp(){
-    var e = document.getElementById("email").value;
-    var p = document.getElementById("password").value;
-    auth.createUserWithEmailAndPassword(e,p)
-      .then(()=>{ window.location.href="dashboard.html"; })
-      .catch(err=>{ document.getElementById("msg").innerText=err.message; });
-  }
-
-  // SIGN IN
-  function signIn(){
-    var e = document.getElementById("email").value;
-    var p = document.getElementById("password").value;
-    auth.signInWithEmailAndPassword(e,p)
-      .then(()=>{ window.location.href="dashboard.html"; })
-      .catch(err=>{ document.getElementById("msg").innerText=err.message; });
-  }
-
-  // GOOGLE LOGIN (MOBILE SAFE)
-  function googleLogin(){
-    auth.signInWithRedirect(provider);
-  }
+function openSite(){
+  window.location.href="dashboard.html";
+}
 </script>
 
 </body>
