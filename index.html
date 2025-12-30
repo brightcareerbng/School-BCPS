@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BCPS Login</title>
 
+<!-- Firebase SDKs (STABLE v8) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
 <style>
 body{
   margin:0;
@@ -44,14 +48,8 @@ button{
   font-size:15px;
   cursor:pointer;
 }
-.signin{
-  background:#0a7c3a;
-  color:#fff;
-}
-.signup{
-  background:#1f6feb;
-  color:#fff;
-}
+.signin{background:#0a7c3a;color:#fff;}
+.signup{background:#1f6feb;color:#fff;}
 .google{
   background:#fff;
   color:#444;
@@ -63,13 +61,6 @@ button{
   font-size:13px;
   color:#666;
 }
-.link{
-  text-align:center;
-  margin-top:10px;
-  font-size:14px;
-  color:#1f6feb;
-  cursor:pointer;
-}
 </style>
 </head>
 
@@ -79,12 +70,11 @@ button{
   <h2>BCPS</h2>
   <p class="school">Bright Career Public School</p>
 
-  <!-- SIGN IN -->
-  <input type="email" placeholder="Email">
-  <input type="password" placeholder="Password">
-  <button class="signin" onclick="signIn()">Sign In</button>
+  <!-- EMAIL / PASSWORD -->
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
 
-  <!-- SIGN UP -->
+  <button class="signin" onclick="signIn()">Sign In</button>
   <button class="signup" onclick="signUp()">Sign Up</button>
 
   <div class="divider">OR</div>
@@ -94,22 +84,46 @@ button{
     Continue with Google
   </button>
 
-  <div class="link" onclick="forgotPass()">Forgot password?</div>
+  <p id="msg" style="color:red;text-align:center;"></p>
 </div>
 
 <script>
-function signIn(){
-  alert("Sign In button click ho raha hai");
-}
-function signUp(){
-  alert("Sign Up button click ho raha hai");
-}
-function googleLogin(){
-  alert("Google Sign In click ho raha hai");
-}
-function forgotPass(){
-  alert("Forgot password click ho raha hai");
-}
+  // 🔥 FIREBASE CONFIG (BCPS)
+  var firebaseConfig = {
+    apiKey: "AIzaSyCSH7H2tE22KarKb5qb2Nr6H0V1Ok5O76c",
+    authDomain: "bcps-b9470.firebaseapp.com",
+    projectId: "bcps-b9470",
+    storageBucket: "bcps-b9470.firebasestorage.app",
+    messagingSenderId: "1036686596196",
+    appId: "1:1036686596196:web:dcaf68ece5a45336912771"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  var auth = firebase.auth();
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  // SIGN UP
+  function signUp(){
+    var e = document.getElementById("email").value;
+    var p = document.getElementById("password").value;
+    auth.createUserWithEmailAndPassword(e,p)
+      .then(()=>{ window.location.href="dashboard.html"; })
+      .catch(err=>{ document.getElementById("msg").innerText=err.message; });
+  }
+
+  // SIGN IN
+  function signIn(){
+    var e = document.getElementById("email").value;
+    var p = document.getElementById("password").value;
+    auth.signInWithEmailAndPassword(e,p)
+      .then(()=>{ window.location.href="dashboard.html"; })
+      .catch(err=>{ document.getElementById("msg").innerText=err.message; });
+  }
+
+  // GOOGLE LOGIN (MOBILE SAFE)
+  function googleLogin(){
+    auth.signInWithRedirect(provider);
+  }
 </script>
 
 </body>
