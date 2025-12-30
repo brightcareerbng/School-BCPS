@@ -1,61 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BCPS Login</title>
 
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #eef2f3;
-    font-family: Arial, sans-serif;
-  }
-  .login-box {
-    background: #fff;
-    padding: 30px;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 0 10px #aaa;
-  }
-  .login-box h2 {
-    color: #0a7c3a;
-    margin-bottom: 5px;
-  }
-  .login-box p {
-    margin-top: 0;
-    font-size: 14px;
-    color: #333;
-  }
-  .login-box button {
-    width: 100%;
-    padding: 12px;
-    background: #0a7c3a;
-    color: white;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 15px;
-  }
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#eef2f3;
+  font-family:Arial;
+}
+.box{
+  background:#fff;
+  padding:30px;
+  width:300px;
+  text-align:center;
+  box-shadow:0 0 10px #aaa;
+}
+button{
+  width:100%;
+  padding:12px;
+  background:#0a7c3a;
+  color:#fff;
+  border:none;
+  font-size:16px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="box">
   <h2>BCPS Login</h2>
   <p>Bright Career Public School</p>
-
-  <button id="googleLoginBtn">Sign in with Google</button>
+  <button onclick="googleLogin()">Sign in with Google</button>
+  <p id="msg"></p>
 </div>
 
-<!-- LOAD APP.JS AFTER PAGE IS READY -->
-<script type="module">
-  import "./app.js";
+<script>
+  // 🔥 FIREBASE CONFIG
+  var firebaseConfig = {
+    apiKey: "AIzaSyCSH7H2tE22KarKb5qb2Nr6H0V1Ok5O76c",
+    authDomain: "bcps-b9470.firebaseapp.com",
+    projectId: "bcps-b9470",
+    storageBucket: "bcps-b9470.firebasestorage.app",
+    messagingSenderId: "1036686596196",
+    appId: "1:1036686596196:web:dcaf68ece5a45336912771"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var auth = firebase.auth();
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  function googleLogin(){
+    auth.signInWithRedirect(provider);
+  }
 </script>
 
 </body>
